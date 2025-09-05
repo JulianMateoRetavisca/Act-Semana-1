@@ -1,61 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Casos de uso</title>
-    <link 
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-        rel="stylesheet" 
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
-        crossorigin="anonymous"
-    >
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casos de uso</title>
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet" 
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+    crossorigin="anonymous"
+  >
+<style>
+  body {
+    background-color: #191414;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .navbar {
+    background-color: #1DB954 !important;
+  }
+  .navbar a {
+    color: #ffffff !important;
+    font-weight: bold;
+  }
+
+  h1, h2, h3 {
+    color: #1DB954;
+    font-weight: bold;
+  }
+  p {
+    line-height: 1.7;
+    font-size: 1.05rem;
+    color: #b3b3b3; 
+  }
+  .card {
+    background-color: #121212;
+    border: 1px solid #1DB954;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+
+  .dropdown-menu {
+    background-color: #000000 !important;
+  }
+
+
+  .dropdown-menu .dropdown-item {
+    color: #ffffff !important;
+  }
+
+
+  .dropdown-menu .dropdown-item:hover {
+    background-color: #1DB954 !important;
+    color: #000000 !important;
+  }
+</style>
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <button 
-                class="navbar-toggler" 
-                type="button" 
-                data-bs-toggle="collapse" 
-                data-bs-target="#navbarSupportedContent" 
-                aria-controls="navbarSupportedContent" 
-                aria-expanded="false" 
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a 
-                            class="nav-link dropdown-toggle" 
-                            href="#" 
-                            role="button" 
-                            data-bs-toggle="dropdown" 
-                            aria-expanded="false">
-                            Menu
-                        </a>
-                            <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/casoUno">Primer Caso</a></li>
-                            <a class="dropdown-item" href="/casoDos">Segundo Caso</a>
-                            <li><a class="dropdown-item" href="/casoTres">Tercer Caso</a></li>
-                            <li><a class="dropdown-item" href="/casoCuatro">Cuarto Caso</a></li>
-                            </ul>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-            </div>
-        </div>
-    </nav>
 
-    <script 
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
-        crossorigin="anonymous">
-    </script>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <button 
+        class="navbar-toggler" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#navbarSupportedContent" 
+        aria-controls="navbarSupportedContent" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a 
+              class="nav-link dropdown-toggle" 
+              href="#" 
+              role="button" 
+              data-bs-toggle="dropdown" 
+              aria-expanded="false">
+              Menú
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/casoUno">Primer Caso</a></li>
+              <li><a class="dropdown-item" href="/casoDos">Segundo Caso</a></li>
+              <li><a class="dropdown-item" href="/casoTres">Tercer Caso</a></li>
+              <li><a class="dropdown-item" href="/casoCuatro">Cuarto Caso</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+    <div class="container mt-10 text-center">
+      <h1 class="d-flex justify-content-center align-items-center gap-2 mb-1">
+      <img src="static/Spotify-Logo.jpg" alt="Spotify Logo" style="height: 115px;">
+       y Machine Learning
+      </h1>
+    </div>
+
+    <div class="card">
+      <h3>Recomendaciones personalizadas</h3>
+      <p>Spotify analiza tu historial de escucha y lo compara con el de otros usuarios para crear playlists como Discover Weekly o Daily Mix. Sus modelos predicen qué canciones podrían gustarte basándose en lo que repites, saltas o guardas.</p>
+    </div>
+
+    <div class="card">
+      <h3>Análisis de audio con IA</h3>
+      <p>La plataforma usa redes neuronales que procesan el audio directamente para extraer información como tempo, energía o instrumentos, y así agrupar canciones con sonidos similares aunque nunca las hayas escuchado.</p>
+    </div>
+
+    <div class="card">
+      <h3>Predicción de tendencias</h3>
+      <p>Spotify utiliza modelos predictivos para detectar qué artistas o géneros están creciendo, lo que le permite crear listas de exitos virales y dar visibilidad a nuevos talentos.</p>
+    </div>
+
+    <div class="card">
+      <h3>Experiencia personalizada</h3>
+      <p>La aplicación adapta lo que ves en la pantalla de inicio según la hora del día, tu ubicación, tu dispositivo y tus hábitos de escucha.</p>
+    </div>
+
+    <div class="card">
+      <h3>Optimización del negocio</h3>
+      <p>Además de música, Spotify aplica ML para mostrar publicidad personalizada, detectar cuentas falsas y optimizar sus servidores anticipando la demanda en picos de uso.</p>
+    </div>
+
+    <div class="card">
+      <h3>Referencias (APA)</h3>
+      <p>Pitchfork. (2021, 28 de enero). <i>Spotify granted patent to use mic to infer emotional state, age, gender, and accent</i>. Pitchfork.</p>
+      <p>AttractGroup. (2025, 1 de marzo). <i>How Spotify algorithm works for music recommendation?</i> AttractGroup.</p>
+    </div>
+  </div>
+
+  <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+    crossorigin="anonymous">
+  </script>
 </body>
 </html>
+
