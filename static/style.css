@@ -1,12 +1,4 @@
 body {
-    background-image: url("Homero1.jpeg");
-    background: size 10px;
-    background-repeat: no-repeat;
-    background-position: 30px;
-    background-attachment: fixed;
-    
-}
-body {
     background-image: url("Homero.jpeg");
     background: size 10px;
     background-repeat: no-repeat;
