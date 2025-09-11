@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casos de uso</title>
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet" 
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+    crossorigin="anonymous"
+  >
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body class="bgH1">
+
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container-fluid">
+      <button 
+        class="navbar-toggler" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#navbarSupportedContent" 
+        aria-controls="navbarSupportedContent" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a 
+              class="nav-link dropdown-toggle" 
+              href="#" 
+              id="navbarDropdown" 
+              role="button" 
+              data-bs-toggle="dropdown" 
+              aria-expanded="false">
+              Menu
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">Casos ML</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/casoUno">Primer Caso</a></li>
+                  <li><a class="dropdown-item" href="/casoDos">Segundo Caso</a></li>
+                  <li><a class="dropdown-item" href="/casoTres">Tercer Caso</a></li>
+                  <li><a class="dropdown-item" href="/casoCuatro">Cuarto Caso</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+          </li>
+        </ul>
+  </nav>
+
+  <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+    crossorigin="anonymous">
+</script>   
+    <h1>Regresión lineal<h1>
+        <form method="post">
+            <label for="hours">Horas de estudio</label> 
+            <input type="number"  name="hours" required>
+            <button type="submit">Predecir</button>
+
+            {% if result is not none %}
+                <h2>Calificación estimada: {{ result }}</h2>
+            {% endif %}
+        </form>
+    <style>
+        h1{
+            color:#fff;
+        }
+        h2{
+            color:#fff;
+        }
+      .navbar{
+        background-color: black;
+      }
+      .dropdown-menu {
+        background-color: #212529;
+      }
+      .dropdown-item {
+        color: #fff;
+      }
+      .dropdown-item:hover {
+        background-color: #343a40;
+      }
+      .dropdown-submenu{
+        position: relative
+      }
+      .dropdown-submenu > .dropdown-menu{
+        display:none;
+        top:0;
+        left:100%;
+        margin-top: 3px;
+      }
+      .dropdown-submenu:hover > .dropdown-menu {
+        display: block;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(20, 20, 20, 0.7);
+        z-index: -1;
+    }
+    .card {
+        border: none;
+        border-radius: 15px;
+        transition: transform 0.1s;
+    }
+    .card1{
+        border: none;
+        border-radius: 1px;
+    }
+
+    .card:hover {
+        transform: translateY(-3px);
+    }
+    </style>
+</body>
+</html>

@@ -11,6 +11,30 @@
     crossorigin="anonymous"
   >
 <style>
+  .navbar{
+        background-color: black;
+      }
+      .dropdown-menu {
+        background-color: #212529;
+      }
+      .dropdown-item {
+        color: #fff;
+      }
+      .dropdown-item:hover {
+        background-color: #343a40;
+      }
+      .dropdown-submenu{
+        position: relative
+      }
+      .dropdown-submenu > .dropdown-menu{
+        display:none;
+        top:0;
+        left:100%;
+        margin-top: 3px;
+      }
+      .dropdown-submenu:hover > .dropdown-menu {
+        display: block;
+      }
   body {
     background-color: #191414;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -56,11 +80,9 @@
     color: #000000 !important;
   }
 </style>
-
 </head>
-<body>
-
-  <nav class="navbar navbar-expand-lg">
+<body class="bgH1">
+      <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="container-fluid">
       <button 
         class="navbar-toggler" 
@@ -75,27 +97,33 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item dropdown">
             <a 
               class="nav-link dropdown-toggle" 
               href="#" 
+              id="navbarDropdown" 
               role="button" 
               data-bs-toggle="dropdown" 
               aria-expanded="false">
-              Menú
+              Menu
             </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/casoUno">Primer Caso</a></li>
-              <li><a class="dropdown-item" href="/casoDos">Segundo Caso</a></li>
-              <li><a class="dropdown-item" href="/casoTres">Tercer Caso</a></li>
-              <li><a class="dropdown-item" href="/casoCuatro">Cuarto Caso</a></li>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">Casos ML</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/casoUno">Primer Caso</a></li>
+                  <li><a class="dropdown-item" href="/casoDos">Segundo Caso</a></li>
+                  <li><a class="dropdown-item" href="/casoTres">Tercer Caso</a></li>
+                  <li><a class="dropdown-item" href="/casoCuatro">Cuarto Caso</a></li>
+                </ul>
+              </li>
             </ul>
           </li>
+          <li class="nav-item">
+          </li>
         </ul>
-      </div>
-    </div>
   </nav>
 
 

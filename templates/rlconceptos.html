@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conceptos básicos - Regresión Lineal</title>
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet">
+  <style>
+    body {
+      background: url("{{ url_for('static', filename='RL.jpg') }}") no-repeat center center fixed;
+      background-size: cover;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 15px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+    }
+    .accordion-button {
+      background: rgba(33, 37, 41, 0.9);
+      color: #fff;
+      font-weight: bold;
+    }
+    .accordion-button:not(.collapsed) {
+      background: #212529;
+      color: #fff;
+    }
+    .accordion-body {
+      color: #212529;
+    }
+    .navbar{
+      background-color: black;
+    }
+    .dropdown-menu {
+      background-color: #212529;
+    }
+    .dropdown-item {
+      color: #fff;
+    }
+    .dropdown-item:hover {
+      background-color: #343a40;
+    }
+    .dropdown-submenu{
+      position: relative
+    }
+    .dropdown-submenu > .dropdown-menu{
+      display:none;
+      top:0;
+      left:100%;
+      margin-top: 3px;
+    }
+    .dropdown-submenu:hover > .dropdown-menu {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔹 Navbar -->
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container-fluid">
+      <button 
+        class="navbar-toggler" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#navbarSupportedContent" 
+        aria-controls="navbarSupportedContent" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a 
+              class="nav-link dropdown-toggle" 
+              href="#" 
+              id="navbarDropdown" 
+              role="button" 
+              data-bs-toggle="dropdown" 
+              aria-expanded="false">
+              Menu
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">Casos ML</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/casoUno">Primer Caso</a></li>
+                  <li><a class="dropdown-item" href="/casoDos">Segundo Caso</a></li>
+                  <li><a class="dropdown-item" href="/casoTres">Tercer Caso</a></li>
+                  <li><a class="dropdown-item" href="/casoCuatro">Cuarto Caso</a></li>
+                </ul>
+              </li>
+              <!-- 🔹 Submenú de Regresión Lineal -->
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">Regresión Lineal</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/regresionConceptos">Conceptos básicos</a></li>
+                  <li><a class="dropdown-item" href="/LR">Ejercicio práctico</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 🔹 Contenido -->
+  <div class="container my-5">
+    <h2 class="text-center mb-4 text-white">Conceptos básicos de Regresión Lineal</h2>
+
+    <div class="accordion" id="accordionConceptos">
+
+      <!-- Sección 1 -->
+      <div class="accordion-item card mb-3">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+            Introducción a la regresión lineal
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionConceptos">
+          <div class="accordion-body">
+            La regresión lineal es una de las herramientas estadísticas más utilizadas para analizar la relación entre variables. 
+            Su propósito es modelar cómo una variable dependiente se comporta en función de una o más variables independientes, 
+            lo que permite tanto describir tendencias como hacer predicciones 
+            (<strong>Dagnino, 2014</strong>). 
+            Por ejemplo, en un contexto educativo, podría usarse para estimar la calificación final de un estudiante a partir de sus horas de estudio y asistencia a clase.
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección 2 -->
+      <div class="accordion-item card mb-3">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+            Regresión lineal múltiple
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionConceptos">
+          <div class="accordion-body">
+            Cuando se extiende a más de una variable explicativa, se habla de regresión lineal múltiple, la cual proporciona un panorama más completo en situaciones donde intervienen varios factores al mismo tiempo. 
+            Este enfoque se estima generalmente mediante mínimos cuadrados ordinarios, buscando que el modelo sea insesgado y eficiente bajo los supuestos clásicos del modelo lineal 
+            (<strong>Uriel, 2013</strong>).
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección 3 -->
+      <div class="accordion-item card mb-3">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+            Supuestos fundamentales
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionConceptos">
+          <div class="accordion-body">
+            <ul>
+              <li><b>Linealidad:</b> la relación entre las variables debe ser lineal. Ejemplo: a mayor temperatura, aumenta la demanda de helados.</li>
+              <li><b>Independencia:</b> los errores deben ser independientes. Ejemplo: en ventas diarias, el error de un día no depende del anterior.</li>
+              <li><b>Homoscedasticidad:</b> la varianza de los errores debe ser constante. Ejemplo: ingresos en función de experiencia deben mostrar errores similares en todos los niveles.</li>
+              <li><b>Normalidad del error:</b> los residuos deben seguir una distribución normal. Ejemplo: al predecir peso desde estatura, los errores se deben distribuir en forma de campana alrededor de cero.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección 4 -->
+      <div class="accordion-item card mb-3">
+        <h2 class="accordion-header" id="headingFour">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+            Conclusión
+          </button>
+        </h2>
+        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionConceptos">
+          <div class="accordion-body">
+            Cumplir con estos supuestos garantiza que las estimaciones del modelo sean confiables y que las inferencias estadísticas tengan validez. 
+            En caso contrario, las conclusiones podrían ser engañosas y sería necesario considerar transformaciones o modelos alternativos 
+            (<strong>Nabi, 2021; Uriel, 2013</strong>).
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección 5 -->
+      <div class="accordion-item card mb-3">
+        <h2 class="accordion-header" id="headingFive">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
+            Referencias
+          </button>
+        </h2>
+        <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionConceptos">
+          <div class="accordion-body">
+            <ul>
+              <li>Dagnino, J. (2014). <i>Regresión lineal</i>. Revista Chilena de Anestesia, 43(2), 143–149. https://doi.org/10.25237/revchilanestv43n02.06</li>
+              <li>Uriel, E. (2013). <i>Regresión lineal múltiple: estimación y propiedades</i>. Universidad de Valencia.</li>
+              <li>Nabi, I. (2021). <i>Supuestos del modelo clásico de regresión lineal y de los modelos lineales generalizados</i>. Marxist Philosophy of Science. https://marxistphilosophyofscience.com/wp-content/uploads/2021/09/supuestos-del-modelo-clasico-de-regresion-lineal-y-de-los-modelos-lineales-generalizados-isadore-nabi.pdf</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
