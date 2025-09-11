@@ -1,8 +1,15 @@
-body {
-    background-image: url("Homero.jpeg");
-    background: size 10px;
+body.bgH1 {
+    background-image: url("/static/icono.jpg");
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position: 30px;
+    background-position: center;
+    background-attachment: fixed;
+}   
+body.bgH2 {
+    background-image: url("Homero.jpeg");
+    background: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     background-attachment: fixed;
     
 }

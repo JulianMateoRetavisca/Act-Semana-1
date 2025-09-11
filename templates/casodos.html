@@ -10,36 +10,53 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
     crossorigin="anonymous"
   >
-  <style>
-    body {
-      background-color: #191414;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    .navbar {
-      background-color: #1DB954 !important;
-    }
-    .navbar a {
-      color: #ffffff !important;
-      font-weight: bold;
-    }
+<style>
+  body {
+    background-color: #191414;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .navbar {
+    background-color: #1DB954 !important;
+  }
+  .navbar a {
+    color: #ffffff !important;
+    font-weight: bold;
+  }
 
-    h1, h2, h3 {
-      color: #1DB954;
-      font-weight: bold;
-    }
-    p {
-      line-height: 1.7;
-      font-size: 1.05rem;
-      color: #b3b3b3; 
-    }
-    .card {
-      background-color: #121212;
-      border: 1px solid #1DB954;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-  </style>
+  h1, h2, h3 {
+    color: #1DB954;
+    font-weight: bold;
+  }
+  p {
+    line-height: 1.7;
+    font-size: 1.05rem;
+    color: #b3b3b3; 
+  }
+  .card {
+    background-color: #121212;
+    border: 1px solid #1DB954;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+
+  .dropdown-menu {
+    background-color: #000000 !important;
+  }
+
+
+  .dropdown-menu .dropdown-item {
+    color: #ffffff !important;
+  }
+
+
+  .dropdown-menu .dropdown-item:hover {
+    background-color: #1DB954 !important;
+    color: #000000 !important;
+  }
+</style>
+
 </head>
 <body>
 
@@ -82,22 +99,26 @@
   </nav>
 
 
-  <div class="container mt-5">
-    <h1 class="text-center mb-4">Spotify y Machine Learning</h1>
-    
+    <div class="container mt-10 text-center">
+      <h1 class="d-flex justify-content-center align-items-center gap-2 mb-1">
+      <img src="static/Spotify-Logo.jpg" alt="Spotify Logo" style="height: 115px;">
+       y Machine Learning
+      </h1>
+    </div>
+
     <div class="card">
       <h3>Recomendaciones personalizadas</h3>
-      <p>Spotify analiza tu historial de escucha y lo compara con el de otros usuarios para crear playlists como <strong>Discover Weekly</strong> o <strong>Daily Mix</strong>. Sus modelos predicen qué canciones podrían gustarte basándose en lo que repites, saltas o guardas.</p>
+      <p>Spotify analiza tu historial de escucha y lo compara con el de otros usuarios para crear playlists como Discover Weekly o Daily Mix. Sus modelos predicen qué canciones podrían gustarte basándose en lo que repites, saltas o guardas.</p>
     </div>
 
     <div class="card">
       <h3>Análisis de audio con IA</h3>
-      <p>La plataforma usa <em>redes neuronales</em> que procesan el audio directamente para extraer información como tempo, energía o instrumentos, y así agrupar canciones con sonidos similares aunque nunca las hayas escuchado.</p>
+      <p>La plataforma usa redes neuronales que procesan el audio directamente para extraer información como tempo, energía o instrumentos, y así agrupar canciones con sonidos similares aunque nunca las hayas escuchado.</p>
     </div>
 
     <div class="card">
       <h3>Predicción de tendencias</h3>
-      <p>Spotify utiliza modelos predictivos para detectar qué artistas o géneros están creciendo, lo que le permite crear listas de <strong>Éxitos virales</strong> y dar visibilidad a nuevos talentos.</p>
+      <p>Spotify utiliza modelos predictivos para detectar qué artistas o géneros están creciendo, lo que le permite crear listas de exitos virales y dar visibilidad a nuevos talentos.</p>
     </div>
 
     <div class="card">
@@ -107,7 +128,13 @@
 
     <div class="card">
       <h3>Optimización del negocio</h3>
-      <p>Además de música, Spotify aplica ML para mostrar <strong>publicidad personalizada</strong>, detectar cuentas falsas y optimizar sus servidores anticipando la demanda en picos de uso.</p>
+      <p>Además de música, Spotify aplica ML para mostrar publicidad personalizada, detectar cuentas falsas y optimizar sus servidores anticipando la demanda en picos de uso.</p>
+    </div>
+
+    <div class="card">
+      <h3>Referencias (APA)</h3>
+      <p>Pitchfork. (2021, 28 de enero). <i>Spotify granted patent to use mic to infer emotional state, age, gender, and accent</i>. Pitchfork.</p>
+      <p>AttractGroup. (2025, 1 de marzo). <i>How Spotify algorithm works for music recommendation?</i> AttractGroup.</p>
     </div>
   </div>
 
