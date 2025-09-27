@@ -9,9 +9,11 @@ from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 from sklearn.naive_bayes import ComplementNB
 from sklearn.metrics import confusion_matrix, accuracy_score
 from scipy.sparse import hstack, csr_matrix
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def entrenar_y_graficar(csv_file='naivebayes.csv'):
-    data = pd.read_csv(csv_file)
+    file_path = os.path.join(BASE_DIR, csv_file)
+    data = pd.read_csv(file_path)
     X = data[['mensaje','prioridad','palabras_clave','hora']].copy()
     y = data['categoria']
     X_train, X_test, y_train, y_test = train_test_split(
@@ -56,7 +58,8 @@ def entrenar_y_graficar(csv_file='naivebayes.csv'):
     return {"accuracy": round(acc,4), "image": img_path}
 
 def predecir(csv_file, mensaje, prioridad, palabras_clave, hora, threshold=0.5):
-    data = pd.read_csv(csv_file)
+    file_path = os.path.join(BASE_DIR, csv_file)
+    data = pd.read_csv(file_path)
 
     X = data[['mensaje','prioridad','palabras_clave','hora']].copy()
     y = data['categoria']
