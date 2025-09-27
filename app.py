@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import os
-import Naivebayes
 from flask import Flask, render_template, request
 import matplotlib
 matplotlib.use('Agg')
@@ -10,6 +9,7 @@ import os
 import LRModel
 from LRModel import CalculateGrade
 import LogRep
+import Naivebayes
 
 app = Flask(__name__)
 
