@@ -9,7 +9,7 @@ import os
 import LRModel
 from LRModel import CalculateGrade
 import LogRep
-import naivebayes as Naivebayes
+import Naive
 
 app = Flask(__name__)
 
@@ -148,7 +148,7 @@ def Lc():
 ###########################################
 @app.route("/naivebayes", methods=["GET", "POST"])
 def naive_bayes():
-    resultados = Naivebayes.entrenar_y_graficar("naivebayes.csv")
+    resultados = Naive.entrenar_y_graficar("naivebayes.csv")
     prediccion = probabilidad = interpretacion = None
 
     if request.method == "POST":
@@ -157,7 +157,7 @@ def naive_bayes():
         palabras_clave = request.form["palabras_clave"]
         hora = float(request.form["hora"])
         threshold = float(request.form.get("threshold", 0.5))
-        pred = Naivebayes.predecir("naivebayes.csv", mensaje, prioridad, palabras_clave, hora, threshold)
+        pred = Naive.predecir("naivebayes.csv", mensaje, prioridad, palabras_clave, hora, threshold)
         prediccion = pred["prediccion"]
         probabilidad = pred["probabilidad"]
         interpretacion = pred["interpretacion"]
