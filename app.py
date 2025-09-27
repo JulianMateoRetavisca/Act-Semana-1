@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
 import os
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
+from flask import Flask, render_template, request, url_for
 import LRModel
 from LRModel import CalculateGrade
 import LogRep
@@ -11,6 +11,8 @@ import Naive
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_IMAGES_DIR = os.path.join(BASE_DIR, "static", "images")
+DATA_DIR = os.path.join(BASE_DIR, "data")
+CSV_PATH = os.path.join(DATA_DIR, "naivebayes.csv")
 
 app = Flask(__name__)
 
@@ -56,6 +58,7 @@ def LR():
     distancia = None
     pasajeros = None
     message = None
+
     if request.method == "POST":
         if "precio" in request.form:
             distancia = float(request.form["distancia"])
@@ -66,6 +69,7 @@ def LR():
             distancia = float(request.form["distancia"])
             pasajeros = float(request.form["pasajeros"])
             calculateResult = CalculateGrade(distancia, pasajeros)
+
     os.makedirs(STATIC_IMAGES_DIR, exist_ok=True)
     plt.figure(figsize=(8, 6))
     plt.scatter(df["Distancia Recorrida"], df["Precio"], s=80, label='Datos')
@@ -80,6 +84,7 @@ def LR():
     graph_file = os.path.join(STATIC_IMAGES_DIR, 'grafico.png')
     plt.savefig(graph_file)
     plt.close()
+
     return render_template(
         "rl.html",
         result=calculateResult,
@@ -97,6 +102,7 @@ def Lc():
     model, scaler, x_test, y_test = LogRep.entrenar_modelo()
     confusion_path = os.path.join(STATIC_IMAGES_DIR, "confusion_matrix.png")
     metrics = LogRep.evaluar_modelo(model, x_test, y_test, filename=confusion_path)
+
     if request.method == "POST":
         horas = float(request.form["horas"])
         calorias = float(request.form["calorias"])
@@ -105,6 +111,7 @@ def Lc():
         features = [horas, calorias, sexo, pantalla]
         result, prob = LogRep.Predecir(model, scaler, features)
         metrics = LogRep.evaluar_modelo(model, x_test, y_test, filename=confusion_path)
+
     return render_template(
         "Lc.html",
         metrics=metrics,
@@ -116,23 +123,27 @@ def Lc():
 @app.route("/naivebayes", methods=["GET", "POST"])
 def naive_bayes():
     os.makedirs(STATIC_IMAGES_DIR, exist_ok=True)
-    csv_path = os.path.join(BASE_DIR, "naivebayes.csv")
+    # use CSV in data/ directory
+    csv_path = os.path.join(DATA_DIR, "naivebayes.csv")
     resultados = Naive.entrenar_y_graficar(csv_path)
     prediccion = probabilidad = interpretacion = None
+
     if request.method == "POST":
-        mensaje = request.form["mensaje"]
-        prioridad = request.form["prioridad"]
-        palabras_clave = request.form["palabras_clave"]
-        hora = float(request.form["hora"])
+        mensaje = request.form.get("mensaje", "")
+        prioridad = request.form.get("prioridad", "")
+        palabras_clave = request.form.get("palabras_clave", "")
+        hora = float(request.form.get("hora", 0))
         threshold = float(request.form.get("threshold", 0.5))
         pred = Naive.predecir(csv_path, mensaje, prioridad, palabras_clave, hora, threshold)
         prediccion = pred.get("prediccion")
         probabilidad = pred.get("probabilidad")
         interpretacion = pred.get("interpretacion")
+
     image_url = None
     image_path = resultados.get("image") if isinstance(resultados, dict) else None
     if image_path:
         image_url = url_for('static', filename='images/' + os.path.basename(image_path))
+
     return render_template("NaiveBayes.html",
                            accuracy=resultados.get("accuracy") if isinstance(resultados, dict) else None,
                            image=image_url,
