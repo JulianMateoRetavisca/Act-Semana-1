@@ -9,7 +9,7 @@ import os
 import LRModel
 from LRModel import CalculateGrade
 import LogRep
-import Naivebayes
+import naivebayes as Naivebayes
 
 app = Flask(__name__)
 
