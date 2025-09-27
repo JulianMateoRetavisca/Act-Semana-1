@@ -10,6 +10,9 @@ import LRModel
 from LRModel import CalculateGrade
 import LogRep
 import Naive
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 app = Flask(__name__)
 
