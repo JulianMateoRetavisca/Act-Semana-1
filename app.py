@@ -8,6 +8,7 @@ import LRModel
 from LRModel import CalculateGrade
 import LogRep
 import Naive
+import ReinforcementLearning
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_IMAGES_DIR = os.path.join(BASE_DIR, "static", "images")
@@ -154,6 +155,55 @@ def naive_bayes():
 @app.route("/Practicos")
 def Practicos():
     return render_template("AlgoritClas.html")
+
+@app.route('/RLConceptos')
+def RLConceptos():
+    return render_template("RLConceptos.html")
+
+@app.route('/RLPractico', methods=["GET", "POST"])
+def RLPractico():
+    os.makedirs(STATIC_IMAGES_DIR, exist_ok=True)
+    
+    metricas = None
+    graph_url = None
+    trayectoria_url = None
+    estado_entrenamiento = "No entrenado"
+    
+    if request.method == "POST":
+        action = request.form.get("action")
+        
+        if action == "entrenar":
+            episodios = int(request.form.get("episodios", 500))
+            learning_rate = float(request.form.get("learning_rate", 0.1))
+            gamma = float(request.form.get("gamma", 0.95))
+            epsilon = float(request.form.get("epsilon", 1.0))
+            
+            metricas = ReinforcementLearning.entrenar_agente(
+                episodios=episodios,
+                learning_rate=learning_rate,
+                gamma=gamma,
+                epsilon_inicial=epsilon
+            )
+            
+            graph_url = url_for('static', filename='images/recompensas.png')
+            estado_entrenamiento = "Entrenado"
+            
+        elif action == "probar":
+            trayectoria = ReinforcementLearning.probar_agente()
+            trayectoria_url = url_for('static', filename='images/trayectoria.png')
+            estado_entrenamiento = "Probado"
+            
+        elif action == "reiniciar":
+            ReinforcementLearning.reiniciar_modelo()
+            estado_entrenamiento = "Reiniciado"
+    
+    return render_template(
+        "RLPractico.html",
+        metricas=metricas,
+        graph_url=graph_url,
+        trayectoria_url=trayectoria_url,
+        estado=estado_entrenamiento
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)

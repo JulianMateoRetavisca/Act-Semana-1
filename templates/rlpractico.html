@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aprendizaje por Refuerzo - Caso Práctico</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    .panel {
+      background: white;
+      padding: 25px;
+      margin: 20px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    h1 { color: #fff; text-align: center; margin-bottom: 30px; }
+    h2 { color: #3498db; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #34495e;
+    }
+    input[type="number"] {
+      padding: 10px;
+      border: 2px solid #bdc3c7;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    button {
+      padding: 12px 25px;
+      margin: 10px 5px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-primary { background: #3498db; color: white; }
+    .btn-primary:hover { background: #2980b9; }
+    .btn-success { background: #2ecc71; color: white; }
+    .btn-success:hover { background: #27ae60; }
+    .btn-danger { background: #e74c3c; color: white; }
+    .btn-danger:hover { background: #c0392b; }
+    .metricas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .metrica-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .metrica-card h3 { margin: 0; font-size: 14px; opacity: 0.9; }
+    .metrica-card p { margin: 10px 0 0 0; font-size: 28px; font-weight: bold; }
+    .estado-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .entrenado { background: #2ecc71; color: white; }
+    .no-entrenado { background: #95a5a6; color: white; }
+    img { max-width: 100%; height: auto; border-radius: 8px; }
+    .navbar{ background-color: black; }
+    .dropdown-menu { background-color: #212529; }
+    .dropdown-item { color: #fff; }
+    .dropdown-item:hover { background-color: #343a40; }
+    .dropdown-submenu{ position: relative }
+    .dropdown-submenu > .dropdown-menu{ display:none; top:0; left:100%; margin-top: 3px; }
+    .dropdown-submenu:hover > .dropdown-menu { display: block; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark"> 
+    <div class="container-fluid"> 
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> 
+        <span class="navbar-toggler-icon"></span> 
+      </button> 
+      <div class="collapse navbar-collapse" id="navbarSupportedContent"> 
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
+          <li class="nav-item"> 
+            <a class="nav-link active" aria-current="page" href="/">Home</a> 
+          </li> 
+          <li class="nav-item dropdown"> 
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+              Menu 
+            </a> 
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> 
+              <li class="dropdown-submenu"> 
+                <a class="dropdown-item dropdown-toggle" href="#">Casos ML</a> 
+                <ul class="dropdown-menu"> 
+                  <li><a class="dropdown-item" href="/casoUno">Caso 1</a></li> 
+                  <li><a class="dropdown-item" href="/casoDos">Caso 2</a></li> 
+                  <li><a class="dropdown-item" href="/casoTres">Caso 3</a></li> 
+                  <li><a class="dropdown-item" href="/casoCuatro">Caso 4</a></li> 
+                </ul> 
+              </li> 
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">Regresión Lineal</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/regresionConceptos">Conceptos</a></li>
+                  <li><a class="dropdown-item" href="/LR">Práctico</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">Regresión Logística</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/LogisConceptos">Conceptos</a></li>
+                  <li><a class="dropdown-item" href="/Lc">Práctico</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">Naive Bayes</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/naivebayes">Práctico</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">Aprendizaje por Refuerzo</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/RLConceptos">Conceptos Básicos</a></li>
+                  <li><a class="dropdown-item" href="/RLPractico">Caso Práctico</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">Tipos de Algoritmos de Clasificación</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/Practicos">Prácticos</a></li>
+                </ul>
+              </li>
+            </ul> 
+          </li> 
+        </ul> 
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>🧩 Aprendizaje por Refuerzo - Laberinto Inteligente</h1>
+    
+    <div class="panel">
+      <h2>Estado del Modelo</h2>
+      <span class="estado-badge {{ 'entrenado' if estado == 'Entrenado' or estado == 'Probado' else 'no-entrenado' }}">
+        {{ estado }}
+      </span>
+      <p><strong>🎯 Desafío:</strong> El agente debe aprender a navegar por un <strong>laberinto aleatorio de 12x12</strong> desde la posición inicial (verde 🏁) hasta la meta (roja 🎯), evitando las paredes (negro).</p>
+      <p><strong>🎲 Característica Especial:</strong> Cada vez que entrenas, se genera un laberinto completamente nuevo y diferente con dificultad aleatoria!</p>
+      <p><strong>📍 Posición Inicial:</strong> (0, 0) - Esquina superior izquierda</p>
+      <p><strong>🏁 Meta:</strong> (11, 11) - Esquina inferior derecha</p>
+      <p><strong>🧱 Obstáculos:</strong> Generados aleatoriamente (25%-35% de densidad)</p>
+      <p><strong>🎮 Acciones disponibles:</strong> Arriba ↑, Abajo ↓, Izquierda ←, Derecha →</p>
+      <p><strong>🎯 Objetivo:</strong> Encontrar el camino óptimo en cada laberinto único que minimice el número de pasos hasta la meta.</p>
+      <p><strong>⚡ Dificultad:</strong> ⭐ FÁCIL (< 25%) | ⭐⭐ MEDIO (25-30%) | ⭐⭐⭐ DIFÍCIL (> 30%)</p>
+    </div>
+
+    <div class="panel">
+      <h2>⚙️ Configuración de Entrenamiento</h2>
+      <p class="alert alert-info">
+        🎲 <strong>¡Nuevo Laberinto en Cada Entrenamiento!</strong> Cada vez que presiones "Iniciar Entrenamiento", 
+        se generará un laberinto completamente nuevo y aleatorio con diferente disposición de paredes y nivel de dificultad.
+      </p>
+      <form method="POST">
+        <input type="hidden" name="action" value="entrenar">
+        <div class="controls">
+          <div class="control-group">
+            <label for="episodios">Episodios:</label>
+            <input type="number" id="episodios" name="episodios" value="500" min="100" max="2000" step="100">
+            <small class="text-muted">Número de episodios de entrenamiento</small>
+          </div>
+          <div class="control-group">
+            <label for="learning_rate">Tasa de Aprendizaje (α):</label>
+            <input type="number" id="learning_rate" name="learning_rate" value="0.1" min="0.01" max="1" step="0.01">
+            <small class="text-muted">Qué tan rápido aprende el agente</small>
+          </div>
+          <div class="control-group">
+            <label for="gamma">Factor de Descuento (γ):</label>
+            <input type="number" id="gamma" name="gamma" value="0.95" min="0.1" max="0.99" step="0.05">
+            <small class="text-muted">Importancia de recompensas futuras</small>
+          </div>
+          <div class="control-group">
+            <label for="epsilon">Epsilon Inicial:</label>
+            <input type="number" id="epsilon" name="epsilon" value="1.0" min="0.1" max="1" step="0.1">
+            <small class="text-muted">Tasa inicial de exploración</small>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary">🚀 Iniciar Entrenamiento con Nuevo Laberinto</button>
+      </form>
+    </div>
+
+    {% if metricas %}
+    <div class="panel">
+      <h2>📊 Métricas de Entrenamiento</h2>
+      <div class="metricas">
+        <div class="metrica-card">
+          <h3>Episodios Completados</h3>
+          <p>{{ metricas.episodios }}</p>
+        </div>
+        <div class="metrica-card">
+          <h3>Recompensa Promedio</h3>
+          <p>{{ "%.2f"|format(metricas.recompensa_promedio) }}</p>
+        </div>
+        <div class="metrica-card">
+          <h3>Epsilon Final</h3>
+          <p>{{ "%.4f"|format(metricas.epsilon_final) }}</p>
+        </div>
+        <div class="metrica-card">
+          <h3>Recompensa Máxima</h3>
+          <p>{{ "%.2f"|format(metricas.recompensa_maxima) }}</p>
+        </div>
+        <div class="metrica-card" style="background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);">
+          <h3>Episodios Exitosos</h3>
+          <p>{{ metricas.episodios_exitosos }}</p>
+        </div>
+        <div class="metrica-card" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);">
+          <h3>Tasa de Éxito</h3>
+          <p>{{ "%.1f"|format(metricas.tasa_exito) }}%</p>
+        </div>
+        <div class="metrica-card" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">
+          <h3>Obstáculos</h3>
+          <p>{{ metricas.obstaculos_totales }}</p>
+        </div>
+        <div class="metrica-card" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
+          <h3>Densidad</h3>
+          <p>{{ "%.1f"|format(metricas.densidad_laberinto) }}%</p>
+        </div>
+      </div>
+      <p class="text-muted mt-3">
+        <strong>💡 Interpretación:</strong> Una recompensa promedio más alta indica mejor rendimiento. 
+        El epsilon final muestra cuánto explora vs. explota el agente al final del entrenamiento.
+        La tasa de éxito indica el porcentaje de episodios donde el agente llegó a la meta.
+        La densidad muestra qué tan difícil es el laberinto (más densidad = más difícil).
+      </p>
+    </div>
+    {% endif %}
+
+    {% if graph_url %}
+    <div class="panel">
+      <h2>📈 Evolución de Recompensas</h2>
+      <p>Este gráfico muestra cómo mejora el agente a lo largo del entrenamiento en el laberinto. 
+         La línea roja representa la media móvil, que suaviza las fluctuaciones.</p>
+      <img src="{{ graph_url }}?{{ range(1000) | random }}" alt="Gráfico de Recompensas">
+    </div>
+    {% endif %}
+
+    <div class="panel">
+      <h2>🎮 Probar Agente</h2>
+      <p>Ejecuta un episodio de prueba para ver cómo se comporta el agente entrenado en el laberinto actual.</p>
+      <form method="POST" style="display: inline;">
+        <input type="hidden" name="action" value="probar">
+        <button type="submit" class="btn-success">▶️ Ejecutar Episodio de Prueba</button>
+      </form>
+      <form method="POST" style="display: inline;">
+        <input type="hidden" name="action" value="reiniciar">
+        <button type="submit" class="btn-danger">🔄 Generar Nuevo Laberinto Aleatorio</button>
+      </form>
+      <p class="mt-3 text-muted"><strong>💡 Tip:</strong> Prueba generar varios laberintos aleatorios para ver cómo el agente se adapta a diferentes niveles de dificultad!</p>
+    </div>
+
+    {% if trayectoria_url %}
+    <div class="panel">
+      <h2>🗺️ Trayectoria del Agente en el Laberinto</h2>
+      <p>Visualización del camino tomado por el agente desde el inicio (verde) hasta la meta (roja). 
+         Las paredes oscuras representan los obstáculos del laberinto que debe evitar.</p>
+      <img src="{{ trayectoria_url }}?{{ range(1000) | random }}" alt="Trayectoria en el Laberinto">
+      <p class="mt-3"><strong>Nota:</strong> Los puntos azules muestran el camino seguido. El tamaño y la intensidad aumentan 
+         a medida que el agente se acerca a la meta, mostrando la progresión de la solución.</p>
+    </div>
+    {% endif %}
+
+    <div style="text-align: center; margin: 30px 0;">
+      <a href="/RLConceptos" class="btn btn-secondary" style="background: #95a5a6; padding: 12px 30px; 
+          color: white; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+        ← Volver a Conceptos
+      </a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
