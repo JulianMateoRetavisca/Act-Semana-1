@@ -5,11 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aprendizaje por Refuerzo - Caso Práctico</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <style>
-    body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-    }
     .container {
       max-width: 1400px;
       margin: 30px auto;
@@ -20,7 +17,7 @@
       padding: 25px;
       margin: 20px 0;
       border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(255, 4, 4, 0.1);
     }
     h1 { color: #fff; text-align: center; margin-bottom: 30px; }
     h2 { color: #3498db; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
@@ -95,7 +92,7 @@
     .dropdown-submenu:hover > .dropdown-menu { display: block; }
   </style>
 </head>
-<body>
+<body class="bgH1">
 
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark"> 
     <div class="container-fluid"> 
@@ -163,27 +160,27 @@
   </nav>
 
   <div class="container">
-    <h1>🧩 Aprendizaje por Refuerzo - Laberinto Inteligente</h1>
+    <h1>Aprendizaje por Refuerzo - Laberinto Inteligente</h1>
     
     <div class="panel">
       <h2>Estado del Modelo</h2>
       <span class="estado-badge {{ 'entrenado' if estado == 'Entrenado' or estado == 'Probado' else 'no-entrenado' }}">
         {{ estado }}
       </span>
-      <p><strong>🎯 Desafío:</strong> El agente debe aprender a navegar por un <strong>laberinto aleatorio de 12x12</strong> desde la posición inicial (verde 🏁) hasta la meta (roja 🎯), evitando las paredes (negro).</p>
-      <p><strong>🎲 Característica Especial:</strong> Cada vez que entrenas, se genera un laberinto completamente nuevo y diferente con dificultad aleatoria!</p>
-      <p><strong>📍 Posición Inicial:</strong> (0, 0) - Esquina superior izquierda</p>
-      <p><strong>🏁 Meta:</strong> (11, 11) - Esquina inferior derecha</p>
-      <p><strong>🧱 Obstáculos:</strong> Generados aleatoriamente (25%-35% de densidad)</p>
-      <p><strong>🎮 Acciones disponibles:</strong> Arriba ↑, Abajo ↓, Izquierda ←, Derecha →</p>
-      <p><strong>🎯 Objetivo:</strong> Encontrar el camino óptimo en cada laberinto único que minimice el número de pasos hasta la meta.</p>
-      <p><strong>⚡ Dificultad:</strong> ⭐ FÁCIL (< 25%) | ⭐⭐ MEDIO (25-30%) | ⭐⭐⭐ DIFÍCIL (> 30%)</p>
+      <p><strong>Desafío:</strong> El agente debe aprender a navegar por un <strong>laberinto aleatorio de 12x12</strong> desde la posición inicial (verde) hasta la meta (roja), evitando las paredes (negro).</p>
+      <p><strong>Característica Especial:</strong> Cada vez que entrenas, se genera un laberinto completamente nuevo y diferente con dificultad aleatoria!</p>
+      <p><strong>Posición Inicial:</strong> (0, 0) - Esquina superior izquierda</p>
+      <p><strong>Meta:</strong> (11, 11) - Esquina inferior derecha</p>
+      <p><strong>Obstáculos:</strong> Generados aleatoriamente (25%-35% de densidad)</p>
+      <p><strong>Acciones disponibles:</strong> Arriba ↑, Abajo ↓, Izquierda ←, Derecha →</p>
+      <p><strong>Objetivo:</strong> Encontrar el camino óptimo en cada laberinto único que minimice el número de pasos hasta la meta.</p>
+      <p><strong>Dificultad:</strong> FÁCIL (< 25%) | MEDIO (25-30%) | DIFÍCIL (> 30%)</p>
     </div>
 
     <div class="panel">
-      <h2>⚙️ Configuración de Entrenamiento</h2>
+      <h2>Configuración de Entrenamiento</h2>
       <p class="alert alert-info">
-        🎲 <strong>¡Nuevo Laberinto en Cada Entrenamiento!</strong> Cada vez que presiones "Iniciar Entrenamiento", 
+        <strong>¡Nuevo Laberinto en Cada Entrenamiento!</strong> Cada vez que presiones "Iniciar Entrenamiento", 
         se generará un laberinto completamente nuevo y aleatorio con diferente disposición de paredes y nivel de dificultad.
       </p>
       <form method="POST">
@@ -210,13 +207,13 @@
             <small class="text-muted">Tasa inicial de exploración</small>
           </div>
         </div>
-        <button type="submit" class="btn-primary">🚀 Iniciar Entrenamiento con Nuevo Laberinto</button>
+        <button type="submit" class="btn-primary">Iniciar Entrenamiento con Nuevo Laberinto</button>
       </form>
     </div>
 
     {% if metricas %}
     <div class="panel">
-      <h2>📊 Métricas de Entrenamiento</h2>
+      <h2>Métricas de Entrenamiento</h2>
       <div class="metricas">
         <div class="metrica-card">
           <h3>Episodios Completados</h3>
@@ -252,7 +249,7 @@
         </div>
       </div>
       <p class="text-muted mt-3">
-        <strong>💡 Interpretación:</strong> Una recompensa promedio más alta indica mejor rendimiento. 
+        <strong>Interpretación:</strong> Una recompensa promedio más alta indica mejor rendimiento. 
         El epsilon final muestra cuánto explora vs. explota el agente al final del entrenamiento.
         La tasa de éxito indica el porcentaje de episodios donde el agente llegó a la meta.
         La densidad muestra qué tan difícil es el laberinto (más densidad = más difícil).
@@ -262,7 +259,7 @@
 
     {% if graph_url %}
     <div class="panel">
-      <h2>📈 Evolución de Recompensas</h2>
+      <h2>Evolución de Recompensas</h2>
       <p>Este gráfico muestra cómo mejora el agente a lo largo del entrenamiento en el laberinto. 
          La línea roja representa la media móvil, que suaviza las fluctuaciones.</p>
       <img src="{{ graph_url }}?{{ range(1000) | random }}" alt="Gráfico de Recompensas">
@@ -270,22 +267,22 @@
     {% endif %}
 
     <div class="panel">
-      <h2>🎮 Probar Agente</h2>
+      <h2>Probar Agente</h2>
       <p>Ejecuta un episodio de prueba para ver cómo se comporta el agente entrenado en el laberinto actual.</p>
       <form method="POST" style="display: inline;">
         <input type="hidden" name="action" value="probar">
-        <button type="submit" class="btn-success">▶️ Ejecutar Episodio de Prueba</button>
+        <button type="submit" class="btn-success">Ejecutar Episodio de Prueba</button>
       </form>
       <form method="POST" style="display: inline;">
         <input type="hidden" name="action" value="reiniciar">
-        <button type="submit" class="btn-danger">🔄 Generar Nuevo Laberinto Aleatorio</button>
+        <button type="submit" class="btn-danger">Generar Nuevo Laberinto Aleatorio</button>
       </form>
-      <p class="mt-3 text-muted"><strong>💡 Tip:</strong> Prueba generar varios laberintos aleatorios para ver cómo el agente se adapta a diferentes niveles de dificultad!</p>
+      <p class="mt-3 text-muted"><strong>Tip:</strong> Prueba generar varios laberintos aleatorios para ver cómo el agente se adapta a diferentes niveles de dificultad!</p>
     </div>
 
     {% if trayectoria_url %}
     <div class="panel">
-      <h2>🗺️ Trayectoria del Agente en el Laberinto</h2>
+      <h2>Trayectoria del Agente en el Laberinto</h2>
       <p>Visualización del camino tomado por el agente desde el inicio (verde) hasta la meta (roja). 
          Las paredes oscuras representan los obstáculos del laberinto que debe evitar.</p>
       <img src="{{ trayectoria_url }}?{{ range(1000) | random }}" alt="Trayectoria en el Laberinto">
